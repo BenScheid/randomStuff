@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rescue Rush</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        #countdown {
+            font-size: 1.5em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Something big is comming soon!</h1>
+    <div id="countdown">
+        Loading countdown...
+    </div>
+
+    <script>
+        const minSeconds = 7 * 24 * 60 * 60;
+        const maxSeconds = 14 * 24 * 60 * 60;
+        let remainingTime = Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds;
+
+        function updateCountdown() {
+            let weeks = Math.floor(remainingTime / (7 * 24 * 60 * 60));
+            let days = Math.floor((remainingTime % (7 * 24 * 60 * 60)) / (24 * 60 * 60));
+            let hours = Math.floor((remainingTime % (24 * 60 * 60)) / (60 * 60));
+            let minutes = Math.floor((remainingTime % (60 * 60)) / 60);
+            let seconds = remainingTime % 60;
+
+            document.getElementById("countdown").innerHTML = `
+                ${weeks} weeks, ${days} days, ${hours} hours, 
+                ${minutes} minutes, ${seconds} seconds
+            `;
+
+            remainingTime--;
+
+            if (remainingTime < 0) {
+                remainingTime = Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds;
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
